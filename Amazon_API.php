@@ -55,7 +55,6 @@ class Amazon_API {
 	}
 	
 	/**
-	 * Constructor
 	 * 
 	 * @access	public
 	 * @param	string comma separated keywords REQUIRED

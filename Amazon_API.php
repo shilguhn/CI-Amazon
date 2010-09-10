@@ -55,39 +55,6 @@ class Amazon_API {
 	}
 	
 	/**
-	 * 
-	 * @access	public
-	 * @param	string comma separated keywords REQUIRED
-	 * @param	string title search NOT IMPLEMENTED
-	 * @return	void
-	 */
-	function getBooks($keywords = FALSE, $title = FALSE){
-		// build base url
-		$AmazonQuery = array(
-			"Keywords"	=> $keywords,
-			"ResponseGroup" => $this->RESPONSEGROUP,
-			"MerchantId" => $this->MERCHANTID, 
-			"BrowseNodes" => $this->BROWSENODES,
-			"SearchIndex" => $this->SEARCHINDEX,
-			"Sort" => $this->SORT
-		);
-		
-		// get secure url
-		$url = $this->secureURL($AmazonQuery);
-		echo($url);
-		// init curl with secure url
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 7);
-
-		$xml = curl_exec($ch);
-		$curl_info = curl_getinfo($ch);
-		curl_close($ch);
-		$AmazonXML = new SimpleXMLElement($xml);
-		return($AmazonXML);
-	} 
-	
-	/**
 	 * Generate secure url
 	 * 
 	 * @access	public
@@ -127,5 +94,38 @@ class Amazon_API {
 		$url = "http://{$this->SERVER}{$this->URI}?{$querystring}&Signature=" . rawurlencode($sig);
 		return($url);
 		
+	} 
+	
+	/**
+	 * Example method to access books
+	 * @access	public
+	 * @param	string comma separated keywords REQUIRED
+	 * @param	string title search NOT IMPLEMENTED
+	 * @return	mixed xml object with books
+	 */
+	function getBooks($keywords = FALSE, $title = FALSE){
+		// build base url
+		$AmazonQuery = array(
+			"Keywords"	=> $keywords,
+			"ResponseGroup" => $this->RESPONSEGROUP,
+			"MerchantId" => $this->MERCHANTID, 
+			"BrowseNodes" => $this->BROWSENODES,
+			"SearchIndex" => $this->SEARCHINDEX,
+			"Sort" => $this->SORT
+		);
+		
+		// get secure url
+		$url = $this->secureURL($AmazonQuery);
+		echo($url);
+		// init curl with secure url
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 7);
+
+		$xml = curl_exec($ch);
+		$curl_info = curl_getinfo($ch);
+		curl_close($ch);
+		$AmazonXML = new SimpleXMLElement($xml);
+		return($AmazonXML);
 	}
 }

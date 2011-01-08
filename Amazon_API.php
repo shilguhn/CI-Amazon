@@ -8,7 +8,7 @@
  * @author		Martin Koch <martin@shackeluri.com>
  * @copyright	Copyright (c) 2010, Martin Koch
  * @license		GNU Lesser General Public License (http://www.gnu.org/copyleft/lgpl.html)
- * @link		http://www.shackeluri.com/code/amazon_api/
+ * @link		http://www.shackeluri.com/2010/09/16/amazon-web-services-and-codeigniter/
  * @version		Version 0.1
  * @filesource
  */
@@ -116,7 +116,6 @@ class Amazon_API {
 		
 		// get secure url
 		$url = $this->secureURL($AmazonQuery);
-		echo($url);
 		// init curl with secure url
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
